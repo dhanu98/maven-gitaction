@@ -49,4 +49,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
         with:
-          
+          context: .
+          dockerfile: ./Dockerfile
+          push: true
+          tags: dhananjaytupe/my-java-app:latest  # Replace with your Docker Hub username/image name
