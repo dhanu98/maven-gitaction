@@ -9,27 +9,29 @@
     <packaging>jar</packaging>
 
     <dependencies>
+        <!-- Spring Boot Starter (no need to specify version unless needed) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
             <version>2.5.4</version>
         </dependency>
-        <!-- Add other dependencies as needed -->
+        <!-- You can add additional dependencies here -->
     </dependencies>
 
     <build>
         <plugins>
+            <!-- Spring Boot Maven Plugin for building executable JARs -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.5.4</version> <!-- Ensure the version matches the Spring Boot version you're using -->
+            </plugin>
+
+            <!-- Optional: Maven Jar Plugin if you're not using Spring Boot's Maven Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.1.0</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
