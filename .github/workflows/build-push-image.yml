@@ -3,10 +3,10 @@ name: Build, Store Artifacts, and Push Docker Image
 on:
   push:
     branches:
-      - main  # Trigger action on pushing to the main branch
+      - main
   pull_request:
     branches:
-      - main  # Trigger action for pull requests to the main branch
+      - main
 
 jobs:
   build:
@@ -17,7 +17,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Set up JDK (use Eclipse Temurin instead of AdoptOpenJDK)
+      # Set up JDK 11 using Temurin
       - name: Set up JDK 11
         uses: actions/setup-java@v2
         with:
@@ -25,29 +25,15 @@ jobs:
           distribution: 'temurin'  # Use Temurin instead of AdoptOpenJDK
           java-package: jdk
           architecture: x64
-          check-latest: false
-          server-id: github
-          server-username: GITHUB_ACTOR
-          server-password: GITHUB_TOKEN
-          overwrite-settings: true
 
       # Build the Java project using Maven
       - name: Build with Maven
         run: |
-          mvn clean install -DskipTests  # Skip tests if you don't need them for now
+          mvn clean install -DskipTests  # This should generate target/my-java-app.jar
 
       # Set up Docker Buildx (required for pushing multi-platform Docker images)
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-
-      # Set up Docker Cache to speed up future builds
-      - name: Set up Docker Cache
-        uses: actions/cache@v2
-        with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-buildx-
 
       # Build Docker image
       - name: Build Docker image
@@ -62,7 +48,7 @@ jobs:
           docker push ${{ secrets.DOCKER_USERNAME }}/my-app:${{ github.sha }}
           docker push ${{ secrets.DOCKER_USERNAME }}/my-app:latest
 
-      # Save build artifacts (updated to use actions/upload-artifact v4)
+      # Save build artifacts (optional)
       - name: Save build artifacts
         uses: actions/upload-artifact@v4
         with:
