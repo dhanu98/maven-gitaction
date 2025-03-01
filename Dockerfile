@@ -5,7 +5,7 @@ FROM openjdk:11-jre-slim
 WORKDIR /app
 
 # Copy the Maven-built .jar file into the container
-COPY /target/my-java-app.jar /app/my-java-app.jar
+COPY target/my-java-app.jar /app/my-java-app.jar
 
 # Expose the port the app runs on
 EXPOSE 8080
