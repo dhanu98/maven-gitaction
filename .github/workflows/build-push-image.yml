@@ -34,9 +34,9 @@ jobs:
       - name: Build with Maven
         run: mvn clean install --no-transfer-progress -DskipTests
 
-      # Step 5: Upload the Maven artifact (e.g., my-java-app.jar) as a GitHub artifact
+      # Step 5: Upload the Maven artifact (e.g., my-java-app.jar) as a GitHub artifact (v4)
       - name: Upload Maven Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: my-java-app-artifact
           path: target/my-java-app.jar  # Adjust if your jar is located elsewhere
@@ -48,9 +48,9 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      # Step 7: Download the artifact in a new step
+      # Step 7: Download the artifact in a new step (v4)
       - name: Download Maven Artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: my-java-app-artifact
 
