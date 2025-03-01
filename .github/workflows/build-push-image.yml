@@ -31,17 +31,6 @@ jobs:
         run: |
           mvn clean install -DskipTests  # This should generate target/my-java-app.jar
 
-      # Upload build artifacts to Artifactory
-      - name: Upload to Artifactory
-        uses: JFrogDev/action-upload-artifact@v1
-        with:
-          # Your Artifactory details
-          artifactory_url: ${{ secrets.ARTIFACTORY_URL }}
-          repository: "libs-release-local"  # Modify this with your repo name in Artifactory
-          file: "target/my-java-app.jar"    # Adjust if needed based on your Maven output
-          username: ${{ secrets.ARTIFACTORY_USERNAME }}
-          api_key: ${{ secrets.ARTIFACTORY_API_KEY }}
-
       # Save build artifacts (optional)
       - name: Save build artifacts for future workflows
         uses: actions/upload-artifact@v4
