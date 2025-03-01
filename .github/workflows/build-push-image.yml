@@ -55,9 +55,9 @@ jobs:
           docker push ${{ secrets.DOCKER_USERNAME }}/my-app:${{ github.sha }}
           docker push ${{ secrets.DOCKER_USERNAME }}/my-app:latest
 
-      # Save build artifacts (using actions/upload-artifact v3)
+      # Save build artifacts (updated to use @github/upload-artifact)
       - name: Save build artifacts
-        uses: actions/upload-artifact@v3
+        uses: github/upload-artifact@v1
         with:
           name: java-build-artifacts
           path: ./target/*.jar  # Adjust if you're generating different output files (e.g., WAR files)
