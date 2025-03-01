@@ -1,4 +1,4 @@
-name: Build, Store Artifacts, and Upload to Artifactory
+name: Build, Store Artifacts
 
 on:
   push:
@@ -15,7 +15,7 @@ jobs:
     steps:
       # Checkout code from repository
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       # Set up JDK 11 using Temurin
       - name: Set up JDK 11
@@ -28,12 +28,15 @@ jobs:
 
       # Build the Java project using Maven
       - name: Build with Maven
-        run: |
-          mvn clean install -DskipTests  # This should generate target/my-java-app.jar
+        run: mvn clean install -DskipTests  # Build your Java project
 
-      # Save build artifacts (optional)
-      - name: Save build artifacts for future workflows
+      # List files in target directory (for debugging)
+      - name: List files in target directory
+        run: ls -al target/  # Debugging to ensure the jar is created
+
+      # Save build artifacts
+      - name: Save build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: java-build-artifacts
-          path: target/my-java-app.jar # Path to the artifact you want to save
+          path: target/my-java-app.jar  # Update the path if necessary
