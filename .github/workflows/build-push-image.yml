@@ -50,5 +50,4 @@ jobs:
           push: true
           tags: |
             dhananjaytupe/my-java-app:latest
-            dhananjaytupe/my-java-app:${{ github.sha }}  # Tag with commit SHA for traceability
-            dhananjaytupe/my-java-app:${{ github.ref_name }}-build  # Optional: Tag with branch name (useful for dev branches)
+
